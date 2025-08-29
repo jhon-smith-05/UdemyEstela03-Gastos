@@ -51,7 +51,29 @@ export class LoginComponent{
         });
       return false;
     }
+
+    this.service.getToken({correo:this.usuario.correo, password:this.usuario.password}).subscribe(
+      {
+        next: data => 
+          {
+            console.log(data);
+          },
+        error(err)
+          {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ops...',
+              text: "Las credenciales ingresadas no son válidas "
+            });
+            setInterval(()=>
+            {
+              window.location.href="/login";
+            }, 3000);
+          }
+      });
     return true;
   }
+
+
 
 }
