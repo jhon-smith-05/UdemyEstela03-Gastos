@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TokenService } from '../../service/token.service';
 import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent{
   usuario:any;
   constructor(
     private service: TokenService,
-    //private cookieService: CookieService
+    private cookieService: CookieService
   ){
     this.inciarFomulario();
   }
@@ -56,7 +57,10 @@ export class LoginComponent{
       {
         next: data => 
           {
-            console.log(data);
+            this.cookieService.set('jhon_gastos_token', data.token, 1);
+            this.cookieService.set('jhon_gastos_nombre', data.nombre, 1);
+            this.cookieService.set('jhon_gastos_id', data.id, 1);
+            window.location.href="/";
           },
         error(err)
           {
