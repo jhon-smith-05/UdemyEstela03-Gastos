@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
+        <a class="sidebar-brand" routerLink="/">
             <span class="align-middle">
                 <img src="/img/logo2.png" style="width: 150px;" alt="">
             </span>
@@ -8,11 +8,33 @@
 
         <ul class="sidebar-nav">
             <li class="sidebar-header">
-                Pages
+                Administración
             </li>
-            <li class="sidebar-item active">
-                <a class="sidebar-link" href="index.html">
-                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            <li class="sidebar-item active" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="/usuarios" title="Usuarios">
+                    <i class="align-middle fas fa-users"></i><span class="align-middle">Usuarios</span>
+                </a>
+            </li>
+
+            <li class="sidebar-header">
+                Gastos
+            </li>
+
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="/proveedores" title="Proveedores">
+                    <i class="align-middle fas fa-truck-moving"></i><span class="align-middle">Proveedores</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="/gastos-por-dia" title="Gastos por día">
+                    <i class="fa-regular fa-money-bill-1"></i><span class="align-middle">Gastos por día</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="/gastos-fijos" title="Gastos fijos">
+                    <i class="fa-solid fa-money-bill-trend-up"></i><span class="align-middle">Gastos fijos</span>
                 </a>
             </li>
         </ul>
