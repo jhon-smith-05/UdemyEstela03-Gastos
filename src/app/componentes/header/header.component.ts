@@ -46,4 +46,9 @@ export class HeaderComponent implements OnInit{
     //return dayjs(fecha).format("dddd")
   }
 
+  cerrarSesion()
+  {
+    return this.service.metodoCerrarSesion();
+  }
+
 }
