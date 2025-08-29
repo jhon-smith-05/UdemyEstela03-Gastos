@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TokenService } from '../../service/token.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class LoginComponent{
   constructor(
     private service: TokenService,
     //private cookieService: CookieService
-  ){}
+  ){
+    this.inciarFomulario();
+  }
 
   inciarFomulario()
   {
@@ -28,7 +31,27 @@ export class LoginComponent{
 
   enviar()
   {
-
+    if (this.usuario.correo == 0 || this.usuario.correo == '') 
+      {
+        Swal.fire({
+        icon:'error',
+        timer:2000,
+        title:'Ups',
+        text:'El campo correo es obligatorio'
+        });
+        return false;
+    } 
+    if (this.usuario.password == 0 || this.usuario.password == '') 
+      {
+        Swal.fire({
+        icon:'error',
+        timer:2000,
+        title:'Ups',
+        text:'El campo password es obligatorio'
+        });
+      return false;
+    }
+    return true;
   }
 
 }
