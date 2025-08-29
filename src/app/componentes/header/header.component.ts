@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import dayjs from 'dayjs';
 import 'dayjs/locale/es';
 
 @Component({
@@ -26,6 +27,14 @@ export class HeaderComponent implements OnInit{
       this.hora = new Date();
       }, 1000
     );
+  }
+
+  getFechaActual()
+  {
+    dayjs.locale('es');
+    let fecha = new Date();
+    return `${dayjs(fecha).format("dddd")} ${dayjs(fecha).format("DD")} de ${dayjs(fecha).format("MMMM")} de ${dayjs(fecha).format("YYYY")}`
+    //return dayjs(fecha).format("dddd")
   }
 
 }
