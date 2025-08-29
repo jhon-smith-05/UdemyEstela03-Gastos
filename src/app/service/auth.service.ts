@@ -27,7 +27,6 @@ export class AuthService {
         this.cookieService.deleteAll();
         window.location.href="/login";
       }
-
     });
   }
 
