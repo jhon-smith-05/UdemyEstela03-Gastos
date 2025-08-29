@@ -10,13 +10,13 @@
                   <i class="fas fa-long-arrow-alt-down align-middle"></i>
                 </a>   
                 <a class="nav-link d-none d-sm-inline-block">
-                    fecha
+                    {{fecha | date: 'dd-mm-yyyy'}}
                 </a>
                 <a class="nav-link d-none d-sm-inline-block">
                     <span class="text-dark">|</span>
                 </a>
                 <a class="nav-link d-none d-sm-inline-block">
-                    hora
+                    {{hora | date: 'hh:mm:ss'}}
                 </a>
                 <a class="nav-link d-none d-sm-inline-block">
                     <span class="text-dark">|</span>
@@ -36,6 +36,6 @@
             </li>
         </ul>
     </div>
-    
+
 </nav>
 
