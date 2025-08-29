@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import 'dayjs/locale/es';
 
 @Component({
   selector: 'app-header',
