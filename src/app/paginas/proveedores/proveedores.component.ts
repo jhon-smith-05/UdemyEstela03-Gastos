@@ -63,8 +63,19 @@ export class ProveedoresComponent implements OnInit{
           window.location.href = "/proveedores";
         }, 2000);
       }
+
     if (this.modalTitle == "Editar") 
       {
+        this.datos.stateEditar.add(this.modelo);
+        Swal.fire({
+          icon: 'success',
+          timer: 2000,
+          title: 'OK',
+          text: "Se modificó el registro exitosamente"
+        });
+        setInterval(() => {
+          window.location.href = "/proveedores";
+        }, 2000);
 
     }
 
@@ -75,8 +86,15 @@ export class ProveedoresComponent implements OnInit{
     this.modalService.dismissAll();
   }
 
-  editar(dato: any)
+  editar(arreglo: any)
   {
+    this.modalService.open(this.myModalConf, {size: 'lg'});
+    this.modalTitle = 'Editar';
+    this.modelo =
+    {
+      id: arreglo.id,
+      nombre: arreglo.nombre,
+    };
 
   }
 

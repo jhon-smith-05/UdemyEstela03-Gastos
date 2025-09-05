@@ -73,4 +73,30 @@ stateEnviar = signalSlice({
 });
 
 //editar
+
+private initialStateEdit: StateSend = 
+{
+  datos: null,
+  loaded: false
+};
+
+stateEditar = signalSlice({
+  initialState: this.initialStateEdit,
+  actionSources:
+  {
+    add: (state, action$: Observable<Proveedores>) =>
+        action$.pipe(
+          switchMap((data) => this.proveedoresService.editProveedores(data)),
+          map((datos) => ({datos: datos, status: 'success' as const})),
+          catchError(()=>
+          {
+            return of({
+            datos: null,
+            status: 'error' as const
+          });
+        })
+      )
+  }
+});
+
 }
