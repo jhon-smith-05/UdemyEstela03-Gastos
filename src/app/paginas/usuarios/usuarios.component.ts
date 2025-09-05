@@ -133,4 +133,38 @@ export class UsuariosComponent implements OnInit {
     };
   }
 
+  eliminar(id:any)
+  {
+    Swal.fire({
+      title: "Estas seguro?",
+      text: "se eliminara este resgistro!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Si, Eliminar!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servicio.deleteUsuarios(id).subscribe(
+          {
+            next: data => {
+                Swal.fire({
+                  title: "OK",
+                  icon: "success",
+                  timer: 5000,
+                  text: "Se eliminó el registro exitos"
+              });            
+              setInterval(() => {
+                window.location.href = "/usuarios";
+              }, 2000);
+            },
+            error: error => {
+              console.log('Error:' + error.message)
+            }
+          });
+      }
+    });
+  }
+
 }

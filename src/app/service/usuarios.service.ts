@@ -30,4 +30,9 @@ export class UsuariosService {
   {
     return this._http.put(`${environment.api }usuarios/${id}`, modelo, { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.auth.getToken()}`} });
   }
+
+  deleteUsuarios(id: any):Observable<any>
+  {
+    return this._http.delete(`${environment.api }usuarios/${id}`, { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.auth.getToken()}`} });
+  }
 }
