@@ -74,18 +74,9 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  assemblerRequest(){
-    const modelo = {
-      nombre: this.modelo.nombre,
-      correo: this.modelo.correo,
-      password: this.modelo.password
-    }
-
-  }
-
   enviar()
   {
-    if (this.modalTitle = "Crear") {
+    if (this.modalTitle == "Crear") {
       this.servicio.addUsuarios({nombre:this.modelo.nombre, correo:this.modelo.correo, password:this.modelo.password}).subscribe({
         next: data =>
         {
@@ -104,14 +95,42 @@ export class UsuariosComponent implements OnInit {
           console.log('Error:', error.message);
         }
       });
+    } 
+    
+    if (this.modalTitle == "Editar") {
+      this.servicio.editUsuarios({nombre:this.modelo.nombre, correo:this.modelo.correo, password:this.modelo.password}, this.modelo.id).subscribe({
+        next: data =>
+        {
+          Swal.fire({
+            icon: 'success',
+            timer: 2000,
+            title: 'OK',
+            text: "Se modificó el registro exitosamente"
+          });
+          setInterval(() => {
+            window.location.href = "/usuarios";
+          }, 2000);
+        },
+        error: error => 
+        {
+          console.log('Error:', error.message);
+        }
+      });
+      
     }
   }
 
-  editar(dato:any)
+  editar(datos:any)
   {
-    if (this.modalTitle = "Editar") {
-      
-    }
+    this.modalService.open(this.myModalConf, {size: 'lg'});
+    this.modalTitle = 'Editar';
+    this.modelo =
+    {
+      id: datos.id,
+      nombre: datos.nombre,
+      correo: datos.correo,
+      password:""
+    };
   }
 
 }

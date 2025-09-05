@@ -25,4 +25,9 @@ export class UsuariosService {
   {
     return this._http.post(`${environment.api }usuarios`, modelo, { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.auth.getToken()}`} });
   }
+
+  editUsuarios(modelo: Usuarios, id: any):Observable<any>
+  {
+    return this._http.put(`${environment.api }usuarios/${id}`, modelo, { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.auth.getToken()}`} });
+  }
 }
