@@ -26,7 +26,7 @@ private proveedoresService = inject(ProveedoresService);
 //listar
 private initialState: State = 
 {
-  datos:[],
+  datos: [],
   status: 'loading' as const
 };
 

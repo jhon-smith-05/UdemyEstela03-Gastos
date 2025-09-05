@@ -21,19 +21,53 @@
                               <h5 class="card-title mb-0"> </h5>
                           </div>
                           <div class="card-body">
-                               <div class="table-responsive">
-                                  <table class="table table-bordered table-striped table-hover">
-                                      <thead>
-                                          <tr>
-                                              <th>ID</th>
-                                              <th>Nombre</th>
-                                              <th>Acciones</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                      </tbody>
-                                  </table>
-                               </div>
+                            @switch (datos.state.status()) 
+                            {
+                                @case ("loading") 
+                                {
+                                    <img src="/img/load.gif" />
+                                }
+                                @case ("error") 
+                                {
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error!</strong> Ocurrió un error inesperado, vuelta a intentarlo más tarde
+                                        <button type="button" title="Cerrar" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                }
+                                @default 
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (dato of datos.state().datos; track dato) 
+                                                {
+                                                    <tr>
+                                                        <td>{{dato.id}}</td>
+                                                        <td>{{dato['nombre']}}</td>
+                                                        <td class="text-center">
+                                                            <a (click)="editar(dato)" style="color:#3b7ddd;" title="Editar">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            &nbsp;&nbsp;
+                                                            <a (click)="eliminar(dato.id)" style="color:#eb0909;" title="Eliminar">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            }
+
                           </div>
                       </div>
                   </div>
