@@ -71,7 +71,6 @@ export class UsuariosComponent implements OnInit {
   cerrar()
   {
     this.modalService.dismissAll();
-
   }
 
   enviar()

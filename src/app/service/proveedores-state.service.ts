@@ -3,7 +3,7 @@ import { Proveedores } from '../interfaces/proveedores';
 import { ProveedoresRequest } from '../interfaces/proveedores-request';
 import { ProveedoresService } from './proveedores.service';
 import { signalSlice } from 'ngxtension/signal-slice';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 
 
 interface State {
@@ -47,7 +47,30 @@ state = signalSlice({
 });
 
 //crear
+private initialStateSend: StateSend = 
+{
+  datos: null,
+  loaded: false
+};
 
+stateEnviar = signalSlice({
+  initialState: this.initialStateSend,
+  actionSources:
+  {
+    add: (state, action$: Observable<ProveedoresRequest>) =>
+        action$.pipe(
+          switchMap((data) => this.proveedoresService.addProveedores(data)),
+          map((datos) => ({datos: datos, status: 'success' as const})),
+          catchError(()=>
+          {
+            return of({
+            datos: null,
+            status: 'error' as const
+          });
+        })
+      )
+  }
+});
 
 //editar
 }
