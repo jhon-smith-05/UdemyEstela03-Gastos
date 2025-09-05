@@ -5,28 +5,43 @@ import { FooterComponent } from "../../componentes/footer/footer.component";
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UsuariosService } from '../../service/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterLink],
+  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterLink, FormsModule],
   templateUrl: './usuarios.component.html',
-  styleUrl: './usuarios.component.css'
+  styleUrl: './usuarios.component.css',
+  styles: ``
 })
 export class UsuariosComponent implements OnInit {
 
   datos:any;
   modalTitle!: string;
-
-   @ViewChild("myModalConf", {static: false}) myModalConf!: TemplateRef<any>;
+  modelo:any;
+  @ViewChild("myModalConf", {static: false}) myModalConf!: TemplateRef<any>;
 
   constructor(
     private servicio: UsuariosService,
     private modalService: NgbModal
-  ){}
+  ){
+    this.inciarFormulario();
+  }
 
   ngOnInit(): void {
     this.hacerPeticion();
+  }
+
+  inciarFormulario()
+  {
+    this.modelo =
+    {
+      id:"",
+      nombre: "",
+      correo:"",
+      password:""
+    };
   }
 
   hacerPeticion()
@@ -49,6 +64,7 @@ export class UsuariosComponent implements OnInit {
   {
     this.modalService.open(this.myModalConf, {size: 'lg'});
     this.modalTitle = 'Crear';
+    this.inciarFormulario();
   }
 
   cerrar()
