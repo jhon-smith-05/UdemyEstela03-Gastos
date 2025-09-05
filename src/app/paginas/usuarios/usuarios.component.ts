@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UsuariosService } from '../../service/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
@@ -73,16 +74,44 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+  assemblerRequest(){
+    const modelo = {
+      nombre: this.modelo.nombre,
+      correo: this.modelo.correo,
+      password: this.modelo.password
+    }
+
+  }
+
   enviar()
   {
-
+    if (this.modalTitle = "Crear") {
+      this.servicio.addUsuarios({nombre:this.modelo.nombre, correo:this.modelo.correo, password:this.modelo.password}).subscribe({
+        next: data =>
+        {
+          Swal.fire({
+            icon: 'success',
+            timer: 2000,
+            title: 'OK',
+            text: "Se creó el registro exitosamente"
+          });
+          setInterval(() => {
+            window.location.href = "/usuarios";
+          }, 2000);
+        },
+        error: error => 
+        {
+          console.log('Error:', error.message);
+        }
+      });
+    }
   }
 
   editar(dato:any)
   {
-
+    if (this.modalTitle = "Editar") {
+      
+    }
   }
-
-  
 
 }
