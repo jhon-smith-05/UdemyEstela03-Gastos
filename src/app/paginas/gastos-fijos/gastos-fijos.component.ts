@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MenuComponent } from "../../componentes/menu/menu.component";
 import { HeaderComponent } from "../../componentes/header/header.component";
 import { FooterComponent } from "../../componentes/footer/footer.component";
@@ -9,11 +9,15 @@ import { DatePipe } from '@angular/common';
 import { GastosFijosService } from '../../service/gastos-fijos.service';
 import { FormatearFechaPipe } from '../../pipe/formatear-fecha.pipe';
 import { FormatearNumeroPipe } from '../../pipe/formatear-numero.pipe';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { ProveedoresService } from '../../service/proveedores.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gastos-fijos',
   standalone: true,
-  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterLink, DatePipe,FormatearFechaPipe, FormatearNumeroPipe],
+  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterLink, DatePipe,FormatearFechaPipe, FormatearNumeroPipe, FormsModule],
   templateUrl: './gastos-fijos.component.html',
   styleUrl: './gastos-fijos.component.css'
 })
@@ -21,19 +25,46 @@ export class GastosFijosComponent implements OnInit {
   
   fecha:any;
   datos!:Array<any>;
+  modalTitle!: string;
+  modelo:any;
+  @ViewChild("myModalConf", {static: false}) myModalConf!: TemplateRef<any>;
+  estados!:Array<any>;
+  proveedores!:Array<any>;
 
   constructor(
-    private service: GastosFijosService
-  ){}
+    private servicio: GastosFijosService,
+    private modalService: NgbModal,
+    private serviceProveedores: ProveedoresService
+  ){
+    this.inciarFormulario();
+  }
 
   ngOnInit(): void {
     this.fecha = new Date();
     this.hacerPeticion();
+    this.getProveedores();
+  }
+
+  getMesActual()
+  {
+    let date = new Date();
+    dayjs.locale('es');
+    return dayjs(date).format("MMMM");
+  }
+
+  inciarFormulario() {
+    this.modelo =
+    {
+      id: "",
+      nombre: "",
+      monto: "",
+      proveedores_id: "0"
+    };
   }
 
   hacerPeticion()
   {
-    this.service.getGastosFijos().subscribe({
+    this.servicio.getGastosFijos().subscribe({
       next: data => 
       {
         this.datos = data;
@@ -45,16 +76,69 @@ export class GastosFijosComponent implements OnInit {
     });
   }
 
+  cerrar()
+  {
+    this.modalService.dismissAll();
+  }
   crear()
   {
-
+    this.modalService.open(this.myModalConf, {size: 'lg'});
+    this.modalTitle = 'Crear';
+    this.inciarFormulario();
   }
 
-  getMesActual()
+  getProveedores()
   {
-    let date = new Date();
-    dayjs.locale('es');
-    return dayjs(date).format("MMMM");
+    this.serviceProveedores.getProveedores().subscribe({
+      next:data=>
+      {
+        this.proveedores = data;
+      },error:error=>
+      {
+        console.log('Error: ' + error.message);
+      }
+    });
+  }
+
+  // getEstados() {
+
+  //   this.estadosService.getEstadosGastos().subscribe(
+  //     {
+  //       next: data => {
+
+  //         this.estados = data;
+  //       },
+  //       error: error => {
+  //         console.log('Error: ' + error.message);
+  //       }
+  //     }
+  //   );
+  // }
+
+  enviar() {
+    if (this.modalTitle == "Crear") {
+      this.servicio.addGastosFijos({ nombre: this.modelo.nombre, monto: this.modelo.monto, proveedores_id: this.modelo.proveedores_id }).subscribe({
+        next: data => {
+          Swal.fire({
+            icon: 'success',
+            timer: 2000,
+            title: 'OK',
+            text: "Se creó el registro exitosamente"
+          });
+          setInterval(() => {
+            window.location.href = "/gastos-fijos";
+          }, 2000);
+        },
+        error: error => {
+          console.log('Error:', error.message);
+        }
+      });
+    }
+  }
+
+  editar(dato:any)
+  {
+
   }
 
   eliminar(id:any)
