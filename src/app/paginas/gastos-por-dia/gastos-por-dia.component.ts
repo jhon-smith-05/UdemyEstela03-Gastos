@@ -29,6 +29,7 @@ export class GastosPorDiaComponent implements OnInit{
   modelo:any;
   proveedores!:Array<any>;
   @ViewChild("myModalConf", {static: false}) myModalConf!: TemplateRef<any>;
+  total:any;
 
   constructor(
     private servicio: GastosPorDiaService,
@@ -70,6 +71,12 @@ export class GastosPorDiaComponent implements OnInit{
       next: dato => 
       {
         this.datos = dato;
+        let sum = 0;
+        for (let dato of this.datos) 
+        {
+          sum = sum + dato.total;        
+        }
+        this.total = sum;
       },
       error: error => 
       {
