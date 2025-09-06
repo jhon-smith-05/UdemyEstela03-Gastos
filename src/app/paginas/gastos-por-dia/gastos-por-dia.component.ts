@@ -171,7 +171,33 @@ export class GastosPorDiaComponent implements OnInit{
 
   eliminar(id:any)
   {
+    Swal.fire({
 
+      title: '¿Realmente desea eliminar este registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'NO',
+      confirmButtonText: 'SI'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        this.servicio.deleteGastosPorDia(id).subscribe({
+          next: data => {
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: "Se eliminó el registro exitosamente"
+            });
+            setInterval(() => {
+              window.location.href = "/gastos-por-dia";
+            }, 2000);
+          }, error: error => {
+            console.log('Error: ' + error.message);
+          }
+        });
+      }
+    });
   }
 
 }
