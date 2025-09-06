@@ -47,6 +47,7 @@ export class GastosFijosComponent implements OnInit {
     this.fecha = new Date();
     this.hacerPeticion();
     this.getProveedores();
+    this.getEstados();
   }
 
   getMesActual()
@@ -153,10 +154,43 @@ export class GastosFijosComponent implements OnInit {
         }
       });
     }
+
+    if (this.modalTitle == "Editar") {
+      this.servicio.editGastosFijos({
+        nombre: this.modelo.nombre, 
+        monto: this.modelo.monto, 
+        proveedores_id: this.modelo.proveedores_id, 
+        estados_id: this.modelo.estados_id }, this.modelo.id).subscribe({
+        next: data => {
+          Swal.fire({
+            icon: 'success',
+            timer: 2000,
+            title: 'OK',
+            text: "Se modificó el registro exitosamente"
+          });
+          setInterval(() => {
+            window.location.href = "/gastos-fijos";
+          }, 2000);
+        },
+        error: error => {
+          console.log('Error:', error.message);
+        }
+      });
+    }
   }
 
-  editar(dato:any)
+  editar(arreglo:any)
   {
+    this.modalService.open(this.myModalConf, {size: 'lg'});
+    this.modalTitle = 'Editar';
+    this.modelo =
+    {
+      id: arreglo.id,
+      nombre: arreglo.nombre,
+      monto: arreglo.monto,
+      proveedores_id: arreglo.proveedores_id,
+      estados_id: arreglo.estados_id
+    };
 
   }
 

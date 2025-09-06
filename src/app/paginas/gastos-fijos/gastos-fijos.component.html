@@ -50,7 +50,7 @@
                                                       <i class="fas fa-edit"></i>
                                                   </a>
                                                   &nbsp;&nbsp;
-                                                  <a (click)="eliminar(dato.id)" title="Eliminar" style="color:#3b7ddd;">
+                                                  <a (click)="eliminar(dato.id)" title="Eliminar" style="color:#f30505;">
                                                       <i class="fas fa-trash"></i>
                                                   </a>
                                               </td>
@@ -87,8 +87,8 @@
                 @if(modalTitle=="Editar")
                 {
                 <div class="mb-3">
-                    <label for="estadosId">Estado: </label>
-                    <select name="estadosId" class="form-control" [(ngModel)]="modelo.estadosId" #estadosId="ngModel"
+                    <label for="estados_id">Estado: </label>
+                    <select name="estados_id" class="form-control" [(ngModel)]="modelo.estados_id" #estados_id="ngModel"
                         pattern="[1-9]\d*" required="true">
                         <option value="0">Seleccione.....</option>
                         @for(estado of estados; track estado.id)
@@ -99,10 +99,10 @@
                         }
 
                     </select>
-                    @if(estadosId.invalid && (estadosId.dirty || estadosId.touched))
+                    @if(estados_id.invalid && (estados_id.dirty || estados_id.touched))
                     {
                     <div class="alert alert-danger">
-                        @if(estadosId.errors){
+                        @if(estados_id.errors){
                         <div>
                             Debe seleccionar un estado
                         </div>
@@ -114,8 +114,8 @@
                 }
 
                 <div class="mb-3">
-                    <label for="proveedoresId">Proveedor: </label>
-                    <select name="proveedoresId" id="proveedoresId" class="form-control"
+                    <label for="proveedores_id">Proveedor: </label>
+                    <select name="proveedores_id" id="proveedores_id" class="form-control"
                         [(ngModel)]="modelo.proveedores_id" #proveedores_id="ngModel" pattern="[1-9]\d*"
                         required="true">
                         <option value="0">Seleccione.....</option>
