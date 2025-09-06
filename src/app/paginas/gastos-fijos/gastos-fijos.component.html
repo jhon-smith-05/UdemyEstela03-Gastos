@@ -42,9 +42,9 @@
                                               <td>{{dato.id}}</td>
                                               <td>{{dato.estados}}</td>
                                               <td>{{dato.nombre}}</td>
-                                              <td>{{dato.monto }}</td>
+                                              <td>S/. {{dato.monto | formatearNumero}}</td>
                                               <td>{{dato.proveedores}}</td>
-                                              <td>{{dato.fecha}}</td>
+                                              <td>{{dato.fecha | formatearFecha}}</td>
                                               <td class="text-center">
                                                   <!--<a (click)="editar(dato)" style="color:#3b7ddd;" title="Editar">
                                                       <i class="fas fa-edit"></i>

@@ -5,13 +5,15 @@ import { FooterComponent } from "../../componentes/footer/footer.component";
 import { RouterLink } from '@angular/router';
 import dayjs from 'dayjs';
 import "dayjs/locale/es";
-import { DatePipe, formatNumber } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { GastosFijosService } from '../../service/gastos-fijos.service';
+import { FormatearFechaPipe } from '../../pipe/formatear-fecha.pipe';
+import { FormatearNumeroPipe } from '../../pipe/formatear-numero.pipe';
 
 @Component({
   selector: 'app-gastos-fijos',
   standalone: true,
-  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterLink, DatePipe],
+  imports: [MenuComponent, HeaderComponent, FooterComponent, RouterLink, DatePipe,FormatearFechaPipe, FormatearNumeroPipe],
   templateUrl: './gastos-fijos.component.html',
   styleUrl: './gastos-fijos.component.css'
 })
