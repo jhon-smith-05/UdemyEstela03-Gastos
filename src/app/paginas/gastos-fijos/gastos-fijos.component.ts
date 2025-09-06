@@ -13,6 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ProveedoresService } from '../../service/proveedores.service';
 import Swal from 'sweetalert2';
+import { EstadosService } from '../../service/estados.service';
 
 @Component({
   selector: 'app-gastos-fijos',
@@ -36,7 +37,8 @@ export class GastosFijosComponent implements OnInit {
   constructor(
     private servicio: GastosFijosService,
     private modalService: NgbModal,
-    private serviceProveedores: ProveedoresService
+    private servicioProveedores: ProveedoresService,
+    private servicioEstados: EstadosService
   ){
     this.inciarFormulario();
   }
@@ -106,7 +108,7 @@ export class GastosFijosComponent implements OnInit {
 
   getProveedores()
   {
-    this.serviceProveedores.getProveedores().subscribe({
+    this.servicioProveedores.getProveedores().subscribe({
       next:data=>
       {
         this.proveedores = data;
@@ -117,20 +119,20 @@ export class GastosFijosComponent implements OnInit {
     });
   }
 
-  // getEstados() {
+  getEstados() {
 
-  //   this.estadosService.getEstadosGastos().subscribe(
-  //     {
-  //       next: data => {
+    this.servicioEstados.getEstadosGastos().subscribe(
+      {
+        next: data => {
 
-  //         this.estados = data;
-  //       },
-  //       error: error => {
-  //         console.log('Error: ' + error.message);
-  //       }
-  //     }
-  //   );
-  // }
+          this.estados = data;
+        },
+        error: error => {
+          console.log('Error: ' + error.message);
+        }
+      }
+    );
+  }
 
   enviar() {
     if (this.modalTitle == "Crear") {
