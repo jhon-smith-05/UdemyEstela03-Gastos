@@ -1,1 +1,55 @@
-<p>gastos-por-dia works!</p>
+<div class="wrapper">
+    <app-menu></app-menu>
+    <div class="main">
+        <app-header></app-header>
+        <main class="content">
+            <div class="container-fluid p-0">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a routerLink="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Gastos por día {{getMesActual()}} de {{fecha | date:'YYYY'}}</li>
+                    </ol>
+                </nav>
+                <h1 class="h3 mb-3"><i class=" fas fa-list-alt" ></i>Gastos por día {{getMesActual()}} de {{fecha | date:'YYYY'}}</h1>
+                <div class="row">
+                  <div class="col-12 col-lg-12  d-flex">
+                      <div class="card flex-fill">
+                          <div class="card-header">
+                              <a class="btn btn-outline-primary float-end" title="Crear" (click)="crear()">
+                                  <i class="fas fa-check"></i> Crear
+                              </a>
+                              <h5 class="card-title mb-0">Total: S/1500 </h5>
+                          </div>
+                          <div class="card-body">
+                               <div class="table-responsive">
+                                  <table class="table table-bordered table-striped table-hover">
+                                      <thead>
+                                          <tr>
+                                              <th>N°</th>
+                                              <th>Neto</th>
+                                              <th>IGV</th>
+                                              <th>Total</th>
+                                              <th>Proveedor</th>
+                                              <th>Fecha</th>
+                                              <th>Glosa</th>
+                                              <th>Acciones</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                        
+                                      </tbody>
+                                  </table>
+                               </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </main>
+        <app-footer></app-footer>
+    </div>
+</div>
+
+
+
+
