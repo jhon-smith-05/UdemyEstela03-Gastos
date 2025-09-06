@@ -6,8 +6,8 @@ import dayjs from "dayjs";
 })
 export class FormatearFechaPipe implements PipeTransform {
 
-  transform(value: any) {
-    let fecha=new Date(value);
+  transform(fecha: any) {
+    //let fecha=new Date(value);
     return `${dayjs(fecha).format("DD")}/${dayjs(fecha).format("MM")}/${dayjs(fecha).format("YYYY")}`;
   }
 
