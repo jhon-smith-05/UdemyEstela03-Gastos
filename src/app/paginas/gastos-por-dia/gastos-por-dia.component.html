@@ -36,7 +36,26 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                        
+                                        @for (dato of datos; track dato.id) {
+                                        <tr>
+                                            <td>{{dato.id}}</td>
+                                            <td>${{dato.neto | formatearNumero}}</td>
+                                            <td>${{dato.iva | formatearNumero}}</td>
+                                            <td>${{dato.total | formatearNumero}}</td>
+                                            <td>{{dato.proveedores}}</td>
+                                            <td>{{dato.fecha | formatearFecha}}</td>
+                                            <td>{{dato.glosa}}</td>
+                                            <td class="text-center">
+                                                <a (click)="editar(dato)" style="color:#3b7ddd;" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                &nbsp;&nbsp;
+                                                <a (click)="eliminar(dato.id)" title="Eliminar" style="color:#3b7ddd;">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        }
                                       </tbody>
                                   </table>
                                </div>
