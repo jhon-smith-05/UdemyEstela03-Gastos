@@ -103,34 +103,70 @@ export class GastosPorDiaComponent implements OnInit{
   enviar()
   {
     if (this.modalTitle == "Crear") {
-          this.servicio.addGastosPorDia({ 
-            neto: this.modelo.neto, 
-            iva: this.modelo.iva,
-            total: this.modelo.total,
-            glosa: this.modelo.glosa,
-            proveedores_id: this.modelo.proveedores_id }).subscribe({
-            next: data => {
-              Swal.fire({
-                icon: 'success',
-                timer: 2000,
-                title: 'OK',
-                text: "Se creó el registro exitosamente"
-              });
-              setInterval(() => {
-                window.location.href = "/gastos-por-dia";
-              }, 2000);
-            },
-            error: error => {
-              console.log('Error:', error.message);
-            }
+      this.servicio.addGastosPorDia({
+        neto: this.modelo.neto,
+        iva: this.modelo.iva,
+        total: this.modelo.total,
+        glosa: this.modelo.glosa,
+        proveedores_id: this.modelo.proveedores_id
+      }).subscribe({
+        next: data => {
+          Swal.fire({
+            icon: 'success',
+            timer: 2000,
+            title: 'OK',
+            text: "Se creó el registro exitosamente"
           });
+          setInterval(() => {
+            window.location.href = "/gastos-por-dia";
+          }, 2000);
+        },
+        error: error => {
+          console.log('Error:', error.message);
         }
+      });
+    }
+
+    if (this.modalTitle == "Editar") {
+      this.servicio.editGastosPorDia({
+        neto: this.modelo.neto,
+        iva: this.modelo.iva,
+        total: this.modelo.total,
+        glosa: this.modelo.glosa,
+        proveedores_id: this.modelo.proveedores_id
+      }, this.modelo.id).subscribe({
+        next: data => {
+          Swal.fire({
+            icon: 'success',
+            timer: 2000,
+            title: 'OK',
+            text: "Se modificó el registro exitosamente"
+          });
+          setInterval(() => {
+            window.location.href = "/gastos-por-dia";
+          }, 2000);
+        },
+        error: error => {
+          console.log('Error:', error.message);
+        }
+      });
+    }
 
   }
 
   editar(arreglo:any)
   {
-
+    this.modalService.open(this.myModalConf, {size: 'lg'});
+    this.modalTitle = 'Editar';
+    this.modelo =
+    {
+      id: arreglo.id,
+      neto: arreglo.neto,
+      iva: arreglo.iva,
+      total: arreglo.total,
+      glosa: arreglo.glosa,
+      proveedores_id: arreglo.proveedores_id
+    };
   }
 
   eliminar(id:any)

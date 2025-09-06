@@ -191,7 +191,6 @@ export class GastosFijosComponent implements OnInit {
       proveedores_id: arreglo.proveedores_id,
       estados_id: arreglo.estados_id
     };
-
   }
 
   eliminar(id:any)
