@@ -51,7 +51,7 @@ export class UsuariosComponent implements OnInit {
       next: data => 
         {
           this.datos = data;
-          console.log(this.datos);
+          //console.log(this.datos);
       },
       error: error => 
         {
