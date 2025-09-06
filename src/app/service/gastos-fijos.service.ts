@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { GastosFijosEditar } from '../interfaces/gastos-fijos-editar';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class GastosFijosService {
 
     return this._http.post(`${environment.api}gastos-fijos`, modelo,  { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.authService.getToken()}`} })
   }
-  editGastosFijos(modelo: GastosFijosRequest, id: any): Observable<any> {
+  editGastosFijos(modelo: GastosFijosEditar, id: any): Observable<any> {
 
     return this._http.put(`${environment.api}gastos-fijos/${id}`, modelo,  { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.authService.getToken()}`} })
   }
