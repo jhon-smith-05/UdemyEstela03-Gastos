@@ -100,6 +100,17 @@ export class ProveedoresComponent implements OnInit{
 
   eliminar(id: any)
   {
+    console.log('llega',id)
+    this.datos.stateEliminar.add(id);
+        Swal.fire({
+          icon: 'error',
+          timer: 2000,
+          title: 'OK',
+          text: "EndPoint del back no esta disponible"
+        });
+        setInterval(() => {
+          window.location.href = "/proveedores";
+        }, 2000);
 
   }
 
