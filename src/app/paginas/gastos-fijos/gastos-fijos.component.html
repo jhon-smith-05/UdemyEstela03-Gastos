@@ -18,9 +18,9 @@
                               <a class="btn btn-outline-primary float-end" title="Crear" (click)="crear()">
                                   <i class="fas fa-check"></i> Crear
                               </a>
-                              <h5 class="card-title mb-0">Pagado: 9,898.00 </h5>
-                              <h5 class="card-title mb-0">No pagado: 1,000.00 </h5>
-                              <h5 class="card-title mb-0">Total gastos: 10,898.00 </h5>
+                              <h5 class="card-title mb-0">Pagado: S/.{{siPagados | formatearNumero}} </h5>
+                              <h5 class="card-title mb-0">No pagado: S/.{{noPagados | formatearNumero}} </h5>
+                              <h5 class="card-title mb-0">Total gastos: S/. {{siPagados+noPagados | formatearNumero}} </h5>
                           </div>
                           <div class="card-body">
                                <div class="table-responsive">

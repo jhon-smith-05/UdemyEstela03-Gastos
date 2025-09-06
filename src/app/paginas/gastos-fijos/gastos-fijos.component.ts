@@ -30,6 +30,8 @@ export class GastosFijosComponent implements OnInit {
   @ViewChild("myModalConf", {static: false}) myModalConf!: TemplateRef<any>;
   estados!:Array<any>;
   proveedores!:Array<any>;
+  siPagados:any;
+  noPagados:any;
 
   constructor(
     private servicio: GastosFijosService,
@@ -68,6 +70,21 @@ export class GastosFijosComponent implements OnInit {
       next: data => 
       {
         this.datos = data;
+        let sumaSi = 0;
+        let sumaNo = 0;
+        for (let dato of this.datos) {
+          if (dato.estados_id == 1) 
+            {
+              sumaSi=sumaSi+dato.monto
+            }
+          if (dato.estados_id == 2) 
+            {
+              sumaNo=sumaNo+dato.monto
+            }
+        }
+        this.siPagados = sumaSi;
+        this.noPagados = sumaNo;
+
       },
       error: error =>
       {
