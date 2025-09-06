@@ -33,6 +33,7 @@ export class ProveedoresService {
   
     deleteProveedores(id: any):Observable<any>
     {
+      console.log('servicio id',id)
       return this._http.delete(`${environment.api }proveedores/${id}`, { 'headers': {'content-type': 'application/json', 'Authorization':`Bearer ${this.auth.getToken()}`} });
     }
 }

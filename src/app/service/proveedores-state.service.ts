@@ -73,7 +73,6 @@ stateEnviar = signalSlice({
 });
 
 //editar
-
 private initialStateEdit: StateSend = 
 {
   datos: null,
@@ -92,6 +91,32 @@ stateEditar = signalSlice({
           {
             return of({
             datos: null,
+            status: 'error' as const
+          });
+        })
+      )
+  }
+});
+
+//eliminar
+private initialStateDelete: State = 
+{
+  datos: [],
+  status: 'loading' as const
+};
+
+stateEliminar = signalSlice({
+  initialState: this.initialStateDelete,
+  actionSources:
+  {
+    add: (state, action$: Observable<Proveedores>) =>
+        action$.pipe(
+          switchMap((data) => this.proveedoresService.deleteProveedores(data)),
+          map((datos) => ({datos: datos, status: 'success' as const})),
+          catchError(()=>
+          {
+            return of({
+            datos: [],
             status: 'error' as const
           });
         })
